@@ -1,0 +1,45 @@
+# =========================
+# GLOBAL SECRETS
+# =========================
+.env
+.env.*
+*.env
+
+credentials.json
+token.json
+*.key
+*.pem
+
+# =========================
+# BACKEND
+# =========================
+backend/.env
+backend/.env.*
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+backend/*.pyc
+
+# =========================
+# FRONTEND
+# =========================
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+
+# =========================
+# GENERAL
+# =========================
+node_modules/
+__pycache__/
+*.log
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+*.swp

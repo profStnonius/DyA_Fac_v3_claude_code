@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev gcc build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/ .
+
+# QUEUE env var controls which queues this worker consumes
+ENV QUEUE=email_sync,cfdi_parse,zip_batch,analytics_refresh,report_export
+
+CMD celery -A app.workers.celery_app worker \
+    --loglevel=info \
+    -Q ${QUEUE} \
+    --concurrency=4
